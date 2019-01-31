@@ -1,0 +1,20 @@
+---
+- hosts: localhost 
+  connection: local 
+  gather facts: false 
+  tasks : 
+  - name: Get the input from repository 
+    local action: command curl https://git.xxxxxxxxx.net/bs1—02/1ayered—products—1ist/raw/dev/1ayered.json 
+    register: input json 
+  - set fact: 
+      layered app: "{{input json. stdoutl from json}}" 
+      app details: {}
+#  - debug: Name { {item}} version { {layered app[iteml . package version}}" 
+#  - copy: Name { {item}} version { {layered app[iteml . package version}}" dest=./report.txt 
+#    with items: "{(layered app}}" 
+  - set fact: 
+      app details: '{{app details|combine({item: layered_all[item].package_version})}'
+    with items: "{{layered app}}" 
+  - debug: msg="{{details}}" 
+  - debug: msg="{{item.key}} {{item. value}}" 
+    with dict: "{{app details}}"
