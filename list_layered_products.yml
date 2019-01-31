@@ -7,7 +7,7 @@
     local action: command curl https://git.xxxxxxxxx.net/bs1—02/1ayered—products—1ist/raw/dev/1ayered.json 
     register: input json 
   - set fact: 
-      layered app: "{{input json. stdoutl from json}}" 
+      layered app: "{{input json.stdout| from json}}" 
       app details: {}
 #  - debug: Name { {item}} version { {layered app[iteml . package version}}" 
 #  - copy: Name { {item}} version { {layered app[iteml . package version}}" dest=./report.txt 
